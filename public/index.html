@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatBox – Mock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Sidebar Nav -->
+      <div class="sidebar-nav">
+        <div class="logo"><i class="fa-solid fa-comments"></i></div>
+        <div class="sidebar-main">
+          <a href="#" class="active"><i class="fa-solid fa-user"></i></a>
+          <a href="#"><i class="fa-solid fa-comment-dots"></i></a>
+          <a href="#"><i class="fa-solid fa-users"></i></a>
+          <a href="#"><i class="fa-solid fa-user-plus"></i></a>
+          <a href="#"><i class="fa-solid fa-gear"></i></a>
+        </div>
+        <div class="sidebar-footer">
+          <a href="#"><i class="fa-solid fa-moon"></i></a>
+          <a href="#"><img src="https://i.pravatar.cc/50?img=5" alt="me" /></a>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sb-top">
+          <div class="app-title">ChatBox</div>
+        </div>
+        <div class="sb-search">
+          <input type="search" placeholder="Search messages our users" />
+        </div>
+        <div class="sb-section">Recent</div>
+        <div class="chat-list" id="chatList">
+          <div class="chat-item" data-name="Doris Brown">
+            <div class="avatar online">DB</div>
+            <div>
+              <div class="ci-title">Doris Brown</div>
+              <div class="ci-last">Nice to meet you.</div>
+            </div>
+            <div class="ci-meta">10:32 AM</div>
+          </div>
+          <div class="chat-item" data-name="Designer">
+            <div class="avatar">
+              <img src="images/chat.jpg" alt="" width="25" height="25" />
+            </div>
+            <div>
+              <div class="ci-title">Designer</div>
+              <div class="ci-last">Next meeting tomorrow 10:00AM</div>
+            </div>
+            <div class="ci-meta"><span class="unread">2</span></div>
+          </div>
+          <div class="chat-item" data-name="Albert Rodarte">
+            <div class="avatar">AR</div>
+            <div>
+              <div class="ci-title">Albert Rodarte</div>
+              <div class="ci-last">typing…</div>
+            </div>
+            <div class="ci-meta">09:40</div>
+          </div>
+          <div class="chat-item" data-name="Patricia Smith">
+            <div class="avatar">PS</div>
+            <div>
+              <div class="ci-title">Patricia Smith</div>
+              <div class="ci-last">Wow that's great</div>
+            </div>
+            <div class="ci-meta">19:04</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="content">
+        <!-- Header -->
+        <header class="header">
+          <div class="conv">
+            <div class="avatar online">DB</div>
+            <div>
+              <div class="conv-name">
+                Doris Brown <span class="conv-status">• online</span>
+              </div>
+              <div class="from">Last seen now</div>
+            </div>
+          </div>
+          <div class="hdr-actions">
+            <button class="icon-btn" title="Search" aria-label="Search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <button class="icon-btn" title="profile" aria-label="profile">
+              <i class="fa-regular fa-user"></i>
+            </button>
+            <button class="icon-btn" title="More" aria-label="More">⋯</button>
+          </div>
+        </header>
+
+        <!-- Messages -->
+        <section class="messages" id="messages"></section>
+
+        <!-- Composer -->
+        <form class="composer" id="composer">
+          <button class="attach" title="Attach">
+            <i class="fa-solid fa-paperclip"></i>
+          </button>
+          <input id="input" type="text" placeholder="Enter message..." />
+          <i class="fa-regular fa-face-smile"></i>
+          <button class="send" aria-label="Send" title="Send">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      </main>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+      // Focus input on load
+      const input = document.getElementById("input");
+      const form = document.getElementById("composer");
+      const messages = document.getElementById("messages");
+      input.focus();
+
+      // Switch conversation mock
+      document.querySelectorAll(".chat-item").forEach((ci) => {
+        ci.addEventListener("click", () => {
+          const name = ci.dataset.name || "Conversation";
+          document.querySelector(".conv-name").childNodes[0].nodeValue =
+            name + " ";
+        });
+      });
+    </script>
+  </body>
+</html>
